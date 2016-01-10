@@ -3,7 +3,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         sass: {
             options: {
-                sourceMap: true,
+                sourceMap: false,
                 sourceComments: false
             },
             src: {
@@ -17,6 +17,9 @@ module.exports = function(grunt) {
             }
         },
         watch: {
+            options:{
+                event: 'all'
+            },
             css: {
                 files: ['src/**/*.scss'],
                 tasks: ['sass']
@@ -97,7 +100,6 @@ module.exports = function(grunt) {
         grunt.log.writeln('Currently compiling sass to deploy...');
         grunt.task.run(['sass']);
     });
-
 
     //default custom task
     grunt.registerTask('dev',['toDeploy','styles','watch']);
