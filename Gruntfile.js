@@ -18,23 +18,41 @@ module.exports = function(grunt) {
         },
         watch: {
             css: {
-                files: '**/*.scss',
+                files: ['src/**/*.scss'],
                 tasks: ['sass']
+            },
+            js:{
+                files: ['src/**/*.js'],
+                tasks: ['copy:scripts']
+            },
+            html:{
+                files: ['src/**/*.html'],
+                tasks: ['copy:html']
             }
         },
         copy: {
-            main: {
+            libs: {
                 files:[{
-                    expand: true,
-                    cwd: 'src/',
-                    src: ['**','!**/*.scss'],
-                    dest: 'deploy/'
-                },
-                {
                     expand: true,
                     cwd: 'bower_components/',
                     src: ['**'],
                     dest: 'deploy/libs'
+                }]
+            },
+            scripts: {
+                files:[{
+                    expand: true,
+                    cwd: 'src/',
+                    src: ['**','!**/*.scss', '!**/*/.html'],
+                    dest: 'deploy/'
+                }]
+            },
+            html: {
+                files:[{
+                    expand: true,
+                    cwd: 'src/',
+                    src: ['**','!**/*.scss', '!**/*/.js'],
+                    dest: 'deploy/'
                 }]
             }
         },
@@ -68,23 +86,21 @@ module.exports = function(grunt) {
 
     //--------------------------------------
 
-    //copy SRC to DEPLOY
-    grunt.registerTask('srcDeploy', 'Start coping source files', function() {
-        grunt.log.writeln('Currently running the "copy" task...');
+    //copy All project to DEPLOY
+    grunt.registerTask('toDeploy', 'Start coping source files', function() {
+        grunt.log.writeln('Currently building all project to deploy...');
         grunt.task.run(['copy']);
     });
 
     //compile sass
     grunt.registerTask('styles', 'Start compiling sass files', function() {
-        grunt.log.writeln('Currently running the "sass" task...');
+        grunt.log.writeln('Currently compiling sass to deploy...');
         grunt.task.run(['sass']);
     });
 
-    //clean Deploy
-    //TODO
 
     //default custom task
-    grunt.registerTask('dev',['srcDeploy','styles','watch']);
+    grunt.registerTask('dev',['toDeploy','styles','watch']);
 
 
 }
