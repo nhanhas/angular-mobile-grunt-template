@@ -1,0 +1,5 @@
+.home {
+  margin-top: 100px;
+  background-color: yellow; }
+  .home > div {
+    border: 10px solid green; }

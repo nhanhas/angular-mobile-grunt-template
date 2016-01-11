@@ -44,4 +44,12 @@ $ gem install sass
 
 Checkout the Gruntfile.js configuration
 
+FOR MOBILE PHONEGAP
+In your Gruntfile.js, you need to set 'deploy' to 'www' name, because phonegap will only compile 'www' named folder.
+
+- Rebuild with '$ grunt'
+- and phonegap that with '$ phonegap run ios'
+
+Once its built run '$ phonegap serve' and check out the magic!
+
 
